@@ -7,5 +7,24 @@
       <input name="item_text" id="id_new_item" placeholder="Enter a to-do item"/>
       {% csrf_token %}
     </form>
+    <h1>Existing Lists</h1>
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>number of items</td>
+        </tr>
+      </thead>
+      {% for l in lists %}
+      <tr>
+        <td>
+          <a href="/lists/{{ l.id }}">{{ l.id }}</a>
+        </td>
+        <td>
+          {{ l.item_set.count }}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
   </body>
 </html>
