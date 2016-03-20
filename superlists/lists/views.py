@@ -7,4 +7,4 @@ def home_page(request):
         item = Item.objects.create(text=request.POST['item_text'])
         item.save()
 
-    return render(request, 'home.html')
+    return render(request, 'home.html', {'items': Item.objects.all()})
