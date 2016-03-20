@@ -33,6 +33,11 @@ class HomePageTest(TestCase):
 
         self.assertIn('A new list item', response.content.decode())
 
+    def test_home_page_only_saves_items_when_necessary(self):
+        request = HttpRequest()
+        home_page(request)
+        self.assertEqual(Item.objects.count(), 0)
+
 
 class ItemModelTest(TestCase):
 
