@@ -1,4 +1,5 @@
 from django.core.urlresolvers import resolve
+from django.middleware import csrf
 from django.template.loader import render_to_string
 from django.test import TestCase
 from django.http import HttpRequest
@@ -63,7 +64,8 @@ class HomePageTest(TestCase):
         request = HttpRequest()
         response = home_page(request)
         actual_content = response.content.decode()
-        expected_content = render_to_string('home.html')
+        expected_content = render_to_string('home.html',
+                                            {'csrf_token' : csrf.get_token (request)})
         self.assertEqual(actual_content, expected_content)
 
 
