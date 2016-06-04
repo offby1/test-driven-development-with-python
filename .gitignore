@@ -1,2 +1,4 @@
 .vagrant/
 .bundle/
+/db.sqlite3
+static/
