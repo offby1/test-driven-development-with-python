@@ -1,10 +1,11 @@
 import sys
+from unittest import skip
 
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -32,6 +33,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         rows = table.find_elements_by_tag_name('tr')
         self.assertIn(row_text, [row.text for row in rows])
 
+class NewVisitorTest(FunctionalTest):
 
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
@@ -105,6 +107,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
 
         # Satisfied, they both go back to sleep
 
+class LayoutAndStylingTest(FunctionalTest):
 
     def test_layout_and_styling(self):
         # Edith goes to the home page
@@ -129,6 +132,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
             delta=5
         )
 
+class ItemValidataionTest(FunctionalTest):
+
+    @skip
     def test_cannot_add_empty_list_items(self):
         # Edith goes to the home page and accidentally tries to submit
         # an empty list item. She hits Enter on the empty input box
